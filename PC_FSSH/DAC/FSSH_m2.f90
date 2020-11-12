@@ -154,9 +154,9 @@ complex(kind=8) function f(t,c1,c2,x,p,activeindex)
     double precision :: pna
 
     if (activeindex==1) then
-        if ((p**2+E1(x)-E2(x))>0) then
+        if ((p**2/(2*m)+E1(x)-E2(x))>0) then
             pna=sqrt(1+(2*m*(E1(x)-E2(x)))/(p**2))*p
-        elseif ((p**2+E1(x)-E2(x))<0) then
+        elseif ((p**2/(2*m)+E1(x)-E2(x))<0) then
             pna=0
         endif
         f=(0,1.)*(p**2/m)*c1-(p/m)*d12(x)*c2
@@ -178,9 +178,9 @@ complex(kind=8) function g(t,c1,c2,x,p,activeindex)
 
 
     if (activeindex==1) then
-        if ((p**2+E1(x)-E2(x))>0) then
+        if ((p**2/(2*m)+E1(x)-E2(x))>0) then
             pna=sqrt(1+(2*m*(E1(x)-E2(x)))/(p**2))*p
-        elseif ((p**2+E1(x)-E2(x))<0) then
+        elseif ((p**2/(2*m)+E1(x)-E2(x))<0) then
             pna=0
         endif
         g=(0,1.)*(p*pna/m)*c2-(p/m)*d21(x)*c1
