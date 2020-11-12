@@ -161,7 +161,7 @@ complex(kind=8) function f(t,c1,c2,x,p,activeindex)
         endif
         f=(0,1.)*(p**2/m)*c1-(p/m)*d12(x)*c2
     elseif (activeindex==2) then
-        pna=sqrt(1+(2*m*(E1(x)-E2(x)))/(p**2))*p
+        pna=sqrt(1+(2*m*(E2(x)-E1(x)))/(p**2))*p
         f=(0,1.)*(p*pna/m)*c1-(p/m)*d12(x)*c2
     endif
 
@@ -185,7 +185,7 @@ complex(kind=8) function g(t,c1,c2,x,p,activeindex)
         endif
         g=(0,1.)*(p*pna/m)*c2-(p/m)*d21(x)*c1
     elseif (activeindex==2) then
-        pna=sqrt(1+(2*m*(E1(x)-E2(x)))/(p**2))*p
+        pna=sqrt(1+(2*m*(E2(x)-E1(x)))/(p**2))*p
         g=(0,1.)*(p**2/m)*c2-(p/m)*d21(x)*c1
     endif
 
@@ -265,14 +265,10 @@ endfunction
         double precision :: x,p
         integer :: activeindex
 
-        if (activeindex==1 .and. p<0) then
-            p=-sqrt(p**2+2*m*(E1(x)-E2(x)))
-        elseif (activeindex==1 .and. p>0) then
-            p=sqrt(p**2+2*m*(E1(x)-E2(x)))
-        elseif (activeindex==2 .and. p<0) then
-            p=-sqrt(p**2+2*m*(E2(x)-E1(x)))
-        elseif (activeindex==2 .and. p>0) then
-            p=sqrt(p**2+2*m*(E2(x)-E1(x)))
+        if (activeindex==1) then
+            p=sqrt(1+(2*m*(E1(x)-E2(x)))/(p**2))*p
+        elseif (activeindex==2) then
+            p=sqrt(1+(2*m*(E2(x)-E1(x)))/(p**2))*p
         endif
 
         return
